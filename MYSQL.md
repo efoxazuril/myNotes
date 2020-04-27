@@ -19,13 +19,21 @@
 [Базовые операции](#Базовые-операции)
 
 >[SHOW](#SHOW)
+>
 >[USE](#USE)
+>
 >[CREATE](#CREATE)
+>
 >[DESCRIBE](#DESCRIBE)
+>
 >[INSERT](#INSERT)
+
 >[SELECT](#SELECT)
+>
 >[DELETE](#DELETE)
+>
 >[ALTER TABLE](#ALTER-TABLE)
+>
 >[TRUNCATE](#TRUNCATE)
 
 [ДОБАВЛЕНИЕ, УПРАВЛЕНИЕ И УДАЛЕНИЕ ПОЛЬЗОВАТЕЛЕЙ](#ДОБАВЛЕНИЕ,-УПРАВЛЕНИЕ-И-УДАЛЕНИЕ-ПОЛЬЗОВАТЕЛЕЙ)
