@@ -17,6 +17,7 @@ docker run <имя_образа> 	# запустит данный образ
 		-p XXXX:YYYY		# проброс порта на host XXXX - порта на localhost YYYY - порт контейнера
 		-e	ENV=value   	# задает переменную окружения для контейнера
 		--name NAME			# задает имя контейнера, которое можно использовать вместо хэша
+	--entrypoint top 	# данная команда будет выполнена при запуске контейнера
 docker images 				# показывает список образов
 docker rm <container>  		# удаляет контейнер
 docker rm $(docker ps -aq -f status=exited) # удалит все остановленные контейнеры
@@ -39,7 +40,16 @@ Exit 137 # oom-killer убил контайнер из за нехватки п�
 
 Файл для создание собственного контейнера
 
+Сборка происходит командой
+
+```bash
+docker build -f /path/to/ Dockerfile . # команда собирает образ по Dockerfile из указанной директории 
+```
+
+
+
 FROM  [Документация](https://docs.docker.com/engine/reference/builder/#from)
+
 ```dockerfile
 FROM <image_name> #говорит, какой образ будет нужен
 ```
@@ -70,14 +80,29 @@ ADD [Документация](https://docs.docker.com/engine/reference/builder/
 ADD <from> <to> # копирует /скачивает документ 
  ```
 ```dockerfile
-EXPOSE <port> # указывает какой порт нужно будет открыть
+EXPOSE <port> # указывает какой порт входящих соединений
 ```
+
+CMD [Документация](#https://docs.docker.com/engine/reference/builder/#cmd)
 
 ```DOckerfile
-CMD ["/path/to/bin"] #
+CMD ["/path/to/bin"] # в файле будет выполнена только последняя инструкция CMD
+# есть несколько форматов: 
+#	CMD ["exec", "param1", "param2"] // execform
+#	CMD command param1 param2 // shellform
 ```
 
+Аргументы docker run перезаписывают параметры CMD
 
+CMD  в отличии от RUN не запускается в процессе docker build, однако указывает команду для образа.
+
+ENTRYPOINT [Документация](#https://docs.docker.com/engine/reference/builder/#entrypoint)
+
+```docker
+ENTRYPOINT ["exec", "param1", "param2"]
+```
+
+ENTRYPOINT повторяет docker run --entrypoint , и может быть перезаписан этим параметром
 
 ## Docker-compose
 
@@ -112,4 +137,59 @@ docker-compose up 	# собрать и запустить сервис
 				--remove-orphans	# удаляет контейнеры, которые остались, но не описаны в docker-compose.yml
 docker-compose ps # показать список сервисов запущенных через docker-compose
 ```
+
+###  Пример докеризации приложения на Symfony
+
+Приложение будет состоять из следующих компонентов: 
+
+1. nginx
+2. php-fpm
+3. MySQL
+
+Подготовим структуру папок: 
+
+Подготовим docker-compose.yaml:
+
+```yml
+version: "3.7"
+services:
+	php:
+		container_name: php
+		build: ./php
+		networks:
+			- local-app-net
+		restart: on-failure
+		ports:
+			- 9000:9000
+		volumes:
+	db:
+		image: mysql:latest
+		container_name: mysql
+		networks:
+			- local-app-net
+		restart: on-failure
+		ports:
+			- 3306:3306
+		volumes:
+	nginx:
+		image: nginx:latest
+		container_name: nginx
+		networks:
+			- local-app-net
+			- nginx-external
+		restart: on-failure
+		ports:
+			- 80:80
+		volumes:
+			- ./nginx/conf.d:/etc/nginx/conf.d:ro
+			- ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+networks:
+	local-app-net:
+		driver: bridge
+	nginx-external:
+		external: true
+```
+
+
 
