@@ -1,6 +1,6 @@
 # MYSQL
 
-[toc]
+<!-- toc-->
 
 ### CAP-теорема
 ```bash
