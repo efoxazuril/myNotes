@@ -25,6 +25,7 @@ docker rmi <image>			# удаляет образ
 docker exec -it <container> <entrypoint> # заходит в работающий контейнер и запускает entrypoint
 docker stop <container> 	# останавливает контейнер, переводит его в status=exited
 docker system prune -a 		# удаляет все неиспользуемые контейнеры, директории, сети и образы
+docker cp 			# копирует файлы CONTAINER_NAME:PATH DEST_PATH
 ```
 
 ## Exit коды

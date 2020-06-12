@@ -494,7 +494,37 @@ UTF-8 - многобайтовая
 
 `Я` = `DO AF`
 
+Символы Unicode в Go  представлены с помощью типа `rune` = `int32`
+Литералы рун выглядят так:
+```go
+var r rune = 'Я'
+var r rune = '\n'
+var r rune = '\xff' // последовательность байт
+var r rune = '\u12e4' //unicode code-point
+```
+Руны это целые числа, поэтому их можно складывать
 
+Для работы с Unicode и Utf-8 используется пакет `unicode` и `unicode/utf8'
+```go
+// получить первую руну из строки и ее размер в байтах
+DecodeRuneInString(s string) (r rune, size int)
+
+// получить длинну строки в рунах
+RuneCountInString(s string) (n int)
+
+// проверить валидность строки
+ValidString(s string) bool
+```
+
+Строку всегда можно преобразовать в `slice` и работать далее со слайсом
+
+```go
+s := "привет"
+ba := []byte(s)
+ra := []rune(s)
+fmt.Ptintf("% v/n/b", ra)
+fmt.Printf("% v/n/b", ba)
+```
 
 #### Указатели
 
@@ -513,6 +543,3 @@ UTF-8 - многобайтовая
 #### Use of Insufficently Random Values
 
 #### Reflected XSS
-
-
-

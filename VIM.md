@@ -15,15 +15,35 @@ Find symbol: f<symbol>
 Next: *
 Previous: #
 Search: /<word_to_search> ,  `n` for next, `N` for previous
+Search in top: ?<word_to_search>
 
 New line: `o`
+New line before: `O`
+
 Delete under cursor: `x` 
 Replace under cursor: `r`
+
+Replace:
+    char: `r`
+    word: `cw`
 
 Delete:
 	word: `dw`
 	line: `dd`
 	paste deleted: `p`
+Inside:
+    Universal <command>i<char>
+    
+    Delete something inside:
+        brackets ( : di(
+        brackets [ : di[
+        quotes   " : di"
+        etc.
+ 
+    Replace something inside:
+        brackets { : ci{
+        quotes   ' : ci'
+
 
 Repeat last command: `.`
 
@@ -49,3 +69,9 @@ Help: `:help`
 
 Insert Mode: `i`
 
+Commands:
+    Open terminal: :ter
+    New tab: :tabnew
+    Close tab: :tabc
+        Go to next tab: gt
+        Go to prev. tab: gT
