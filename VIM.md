@@ -55,7 +55,7 @@ REDO: `control+R`
 Duplicate line: `Shift+y` to copy entire line, `p` for paste
 
 Go to line: <line number> G
-
+Go to paring brackets: `%`
 Comment:
 
 Install : https://vimawesome.com/plugin/tcomment
@@ -75,3 +75,7 @@ Commands:
     Close tab: :tabc
         Go to next tab: gt
         Go to prev. tab: gT
+Config<in .vimrc>:
+    Set line numbers: set nu
+    Set relative line numbers: set rnu
+    
