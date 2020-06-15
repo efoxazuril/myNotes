@@ -23,6 +23,11 @@ New line before: `O`
 Delete under cursor: `x` 
 Replace under cursor: `r`
 
+Movement:
+    go to prev edit place: `gi`
+Splits:
+    Split window horizontally:
+    Split window vertically: 
 Replace:
     char: `r`
     word: `cw`

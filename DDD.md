@@ -1,4 +1,0 @@
-# Domain Driving Design
-
-[toc]
-
