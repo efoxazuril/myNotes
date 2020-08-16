@@ -158,3 +158,20 @@ mkdir -p docker-registry/data
 ```yaml
 //TODO
 ```
+### Docker Tutorilal
+```bash
+docker run -d -p 80:80 docker/getting-started
+```
+
+Ключи запуска:
+- `-d` - запустить в фоне (deattached mode)
+- `-p 80:80` - соотнести 80 порт хост ситстемы с 80 портом контейнера
+- `docker/getting-started` - название контейнера
+
+#### Создание контейнера
+
+Контейнер - изолированный процесс в системе.
+Namespaces - 
+Chroot - 
+Cgroups - 
+
